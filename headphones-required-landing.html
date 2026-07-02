@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Headphones Required — The Honest Guide to Frequency Audio | Glenn Carter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#17142B;
+  --ink-2:#1F1B38;
+  --ink-3:#282345;
+  --violet:#8B7BE8;
+  --violet-deep:#6F5FC6;
+  --violet-dim:#4E4192;
+  --text:#E8E5F4;
+  --text-dim:#A9A3C4;
+  --muted:#7B7698;
+  --paper:#F8F7FC;
+  --paper-2:#EEEBFA;
+  --paper-ink:#17142B;
+  --paper-muted:#6E6A85;
+  --line-d:#312B55;
+  --line-l:#DDD9EE;
+  --pass:#4CC38A;
+  --fail:#E5645A;
+  --warn:#D9A13B;
+  --maxw:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.mono{font-family:'JetBrains Mono',monospace}
+.grotesk{font-family:'Space Grotesk',sans-serif}
+
+.chan{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet);display:inline-flex;align-items:center;gap:10px}
+.chan::before{content:"";width:8px;height:8px;border:1.5px solid var(--violet);border-radius:50%}
+
+/* ===== HEADER ===== */
+header{position:sticky;top:0;z-index:90;background:rgba(23,20,43,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:30px;height:20px}
+.brand .n{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15.5px;letter-spacing:-.01em}
+.brand .n i{font-style:normal;color:var(--violet)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:13.5px;color:var(--text-dim);font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;padding:10px 18px;background:var(--violet);color:var(--ink);font-weight:600;border-radius:6px;transition:background .15s}
+.nav-cta:hover{background:#9D8FF0}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.04em;font-weight:600;padding:16px 28px;border-radius:8px;cursor:pointer;transition:.18s;border:1px solid transparent}
+.btn-primary{background:var(--violet);color:var(--ink)}
+.btn-primary:hover{background:#9D8FF0;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line-d)}
+.btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
+.btn-light{background:var(--ink);color:#fff}
+.btn-light:hover{background:var(--ink-3)}
+
+/* ===== HERO ===== */
+.hero{position:relative;padding:88px 0 0;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(48px,8vw,104px);font-weight:700;letter-spacing:-.035em;line-height:.98;margin:26px 0 0;color:#fff}
+.hero h1 .v{color:var(--violet)}
+.hero .lead{font-size:18px;color:var(--text-dim);max-width:640px;margin:28px 0 38px;line-height:1.65}
+.hero .lead b{color:var(--text);font-weight:600}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.hero-note{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+
+/* waveform band — the signature */
+.waveband{position:relative;margin-top:70px;border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);background:var(--ink-2)}
+.waveband .inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;display:grid;grid-template-columns:56px 1fr 250px;align-items:stretch;min-height:150px}
+.ch-label{display:flex;flex-direction:column;justify-content:space-around;border-right:1px solid var(--line-d);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);padding:14px 0}
+.ch-label b{color:var(--violet);font-weight:600}
+.wave-view{position:relative;overflow:hidden}
+.wave-view svg{position:absolute;inset:0;width:200%;height:100%;animation:drift 22s linear infinite}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.wave-view svg{animation:none}}
+.readout{border-left:1px solid var(--line-d);padding:20px 0 20px 24px;display:flex;flex-direction:column;justify-content:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12.5px}
+.readout .r{display:flex;justify-content:space-between;color:var(--text-dim)}
+.readout .r b{color:#fff;font-weight:500}
+.readout .r.delta b{color:var(--violet)}
+.readout .tag{margin-top:6px;font-size:10px;letter-spacing:.18em;color:var(--pass)}
+@media(max-width:820px){.waveband .inner{grid-template-columns:40px 1fr}.readout{display:none}}
+
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:var(--maxw);margin:0 auto;padding:0 28px}
+.hstat{padding:26px 0;border-right:1px solid var(--line-d)}
+.hstat:last-child{border-right:0}
+.hstat:not(:first-child){padding-left:28px}
+.hstat b{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:#fff;letter-spacing:-.02em;display:block}
+.hstat span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-top:4px;display:block}
+@media(max-width:820px){.hero-stats{grid-template-columns:repeat(2,1fr)}.hstat:nth-child(2){border-right:0}.hstat:nth-child(3){padding-left:0;border-top:1px solid var(--line-d)}.hstat:nth-child(4){border-top:1px solid var(--line-d)}}
+
+/* ===== SECTIONS ===== */
+.sec{padding:110px 0}
+.sec h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:-.025em;line-height:1.08;max-width:760px;margin-top:20px;color:#fff}
+.sec .sub{color:var(--text-dim);max-width:620px;margin-top:18px;font-size:16.5px}
+
+/* light variant */
+.sec.light{background:var(--paper);color:var(--paper-ink)}
+.sec.light h2{color:var(--paper-ink)}
+.sec.light .sub{color:var(--paper-muted)}
+.sec.light .chan{color:var(--violet-dim)}
+.sec.light .chan::before{border-color:var(--violet-dim)}
+
+/* ===== FAIL CARDS ===== */
+.fails{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+.fail-card{background:#fff;border:1px solid var(--line-l);border-radius:14px;padding:28px;position:relative}
+.fail-card .fc-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;font-weight:600;padding:5px 10px;border-radius:5px;margin-bottom:18px}
+.fc-tag.f{background:#FBEAE8;color:var(--fail)}
+.fail-card h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;color:var(--paper-ink);margin-bottom:10px;letter-spacing:-.01em}
+.fail-card p{font-size:14px;color:var(--paper-muted);line-height:1.6;margin-bottom:16px}
+.fail-card .meas{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--paper-2);border-left:3px solid var(--fail);padding:10px 12px;border-radius:0 6px 6px 0;color:var(--paper-ink);line-height:1.7}
+@media(max-width:880px){.fails{grid-template-columns:1fr}}
+
+/* ===== CHAPTERS ===== */
+.parts{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
+.part{background:var(--ink-2);border:1px solid var(--line-d);border-radius:14px;padding:30px}
+.part .pt{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;color:var(--violet)}
+.part h3{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;margin:14px 0 16px;color:#fff;letter-spacing:-.01em}
+.part ol{list-style:none;display:flex;flex-direction:column;gap:9px;counter-reset:ch}
+.part li{font-size:14px;color:var(--text-dim);display:flex;gap:12px;counter-increment:ch}
+.part li::before{content:counter(ch,decimal-leading-zero);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--violet-deep);padding-top:2px}
+.part[data-start="4"]{counter-reset:ch 3}
+.part[data-start="8"]{counter-reset:ch 7}
+.part[data-start="12"]{counter-reset:ch 11}
+@media(max-width:820px){.parts{grid-template-columns:1fr}}
+
+/* ===== VIDEO LIST ===== */
+.vlist{margin-top:54px;border:1px solid var(--line-d);border-radius:14px;overflow:hidden}
+.vrow{display:grid;grid-template-columns:64px 1fr auto auto;gap:20px;align-items:center;padding:20px 26px;border-bottom:1px solid var(--line-d);background:var(--ink-2);transition:background .15s}
+.vrow:last-child{border-bottom:0}
+.vrow:hover{background:var(--ink-3)}
+.vrow .vn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--violet);letter-spacing:.06em}
+.vrow .vt{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:-.01em}
+.vrow .vd{font-size:12.5px;color:var(--muted);margin-top:2px}
+.vrow .vlen{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim)}
+.vrow .vfree{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;padding:4px 9px;border-radius:5px;background:rgba(76,195,138,.12);color:var(--pass);border:1px solid rgba(76,195,138,.3)}
+.vrow .vlock{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;padding:4px 9px;border-radius:5px;background:rgba(139,123,232,.1);color:var(--violet);border:1px solid rgba(139,123,232,.3)}
+@media(max-width:680px){.vrow{grid-template-columns:44px 1fr;row-gap:8px}.vrow .vlen{grid-column:2}.vrow .vfree,.vrow .vlock{grid-column:2;justify-self:start}}
+
+/* ===== FREE TEST BAND ===== */
+.freeband{background:linear-gradient(180deg,var(--ink-2),var(--ink));border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d)}
+.freeband .in{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center;padding:80px 0}
+.freeband h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,3.4vw,38px);font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.1;margin-top:18px}
+.freeband p{color:var(--text-dim);margin-top:16px;font-size:15.5px;max-width:480px}
+.free-form{display:flex;gap:10px;margin-top:28px;max-width:460px}
+.free-form input{flex:1;background:var(--ink);border:1px solid var(--line-d);border-radius:8px;padding:14px 18px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .15s}
+.free-form input:focus{border-color:var(--violet)}
+.free-form input::placeholder{color:var(--muted)}
+.testcard{background:var(--ink-2);border:1px solid var(--line-d);border-radius:14px;padding:26px;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:2.05}
+.testcard .tc-h{font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:12px}
+.testcard .ok{color:var(--pass)}
+.testcard .bad{color:var(--fail)}
+.testcard .dim{color:var(--muted)}
+.testcard .w{color:#fff}
+@media(max-width:880px){.freeband .in{grid-template-columns:1fr;gap:40px}}
+
+/* ===== PRICING ===== */
+.pricing{display:grid;grid-template-columns:1fr 1.15fr;gap:22px;margin-top:56px;align-items:stretch}
+.price-card{background:#fff;border:1px solid var(--line-l);border-radius:18px;padding:40px 36px;display:flex;flex-direction:column}
+.price-card.featured{border:2px solid var(--violet-deep);box-shadow:0 30px 80px -30px rgba(111,95,198,.35);position:relative}
+.price-card .best{position:absolute;top:-13px;left:32px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;background:var(--violet-deep);color:#fff;padding:5px 12px;border-radius:99px;font-weight:600}
+.price-card .tn{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--violet-dim);text-transform:uppercase}
+.price-card h3{font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:700;color:var(--paper-ink);margin:12px 0 6px;letter-spacing:-.015em}
+.price-card .pr{display:flex;align-items:baseline;gap:8px;margin:14px 0 6px}
+.price-card .pr b{font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:700;color:var(--paper-ink);letter-spacing:-.03em}
+.price-card .pr span{font-size:14px;color:var(--paper-muted)}
+.price-card .once{font-size:13px;color:var(--paper-muted);margin-bottom:26px}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;flex:1}
+.price-card li{font-size:14.5px;color:var(--paper-ink);display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+.price-card li::before{content:"";width:17px;height:17px;border-radius:50%;flex:0 0 auto;margin-top:2px;background:var(--paper-2) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234E4192'><path d='M6.5 11L3 7.5l1.4-1.4L6.5 8.2 11.6 3l1.4 1.4z'/></svg>") center/10px no-repeat}
+.price-card li.na{color:var(--paper-muted)}
+.price-card li.na::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23B9B4CE'><path d='M4 7.25h8v1.5H4z'/></svg>")}
+.price-card .btn{justify-content:center}
+@media(max-width:820px){.pricing{grid-template-columns:1fr}}
+
+/* ===== HONEST CEILING ===== */
+.ceiling{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-d);border:1px solid var(--line-d);border-radius:14px;overflow:hidden;margin-top:54px}
+.ceil{background:var(--ink-2);padding:34px 30px}
+.ceil .ch2{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;margin-bottom:18px;display:block}
+.ceil.can .ch2{color:var(--pass)}
+.ceil.cant .ch2{color:var(--fail)}
+.ceil ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ceil li{font-size:14.5px;color:var(--text-dim);display:flex;gap:12px}
+.ceil.can li::before{content:"+";color:var(--pass);font-family:'JetBrains Mono',monospace;font-weight:600}
+.ceil.cant li::before{content:"×";color:var(--fail);font-family:'JetBrains Mono',monospace;font-weight:600}
+@media(max-width:680px){.ceiling{grid-template-columns:1fr}}
+
+/* ===== AUTHOR ===== */
+.author{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.sigcard{background:var(--ink-2);border:1px solid var(--line-d);border-radius:14px;padding:28px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2}
+.sigcard .sh{font-size:10px;letter-spacing:.2em;color:var(--muted);margin-bottom:12px}
+.sigcard .k{color:var(--muted)}
+.sigcard .v{color:#fff}
+.sigcard .hl{color:var(--violet)}
+.author p{color:var(--text-dim);font-size:16px;margin-top:16px;line-height:1.7}
+.author p b{color:var(--text)}
+@media(max-width:880px){.author{grid-template-columns:1fr;gap:40px}}
+
+/* ===== FAQ ===== */
+.faq{margin-top:50px;display:flex;flex-direction:column;gap:12px;max-width:820px}
+.faq details{background:var(--ink-2);border:1px solid var(--line-d);border-radius:12px;padding:0 24px}
+.faq summary{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;color:#fff;padding:20px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.01em}
+.faq summary::after{content:"+";font-family:'JetBrains Mono',monospace;color:var(--violet);font-size:18px;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--text-dim);font-size:14.5px;padding-bottom:22px;line-height:1.7;max-width:700px}
+
+/* ===== FINAL CTA ===== */
+.final{background:var(--paper);color:var(--paper-ink);text-align:center;padding:120px 0}
+.final .chan{color:var(--violet-dim)}
+.final .chan::before{border-color:var(--violet-dim)}
+.final h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4.6vw,54px);font-weight:700;letter-spacing:-.03em;line-height:1.05;max-width:740px;margin:22px auto 0;color:var(--paper-ink)}
+.final h2 .v{color:var(--violet-deep)}
+.final p{color:var(--paper-muted);max-width:520px;margin:20px auto 36px;font-size:16.5px}
+.final-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.final .tiny{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--paper-muted);letter-spacing:.05em}
+
+/* ===== FOOTER ===== */
+footer{padding:56px 0 34px;border-top:1px solid var(--line-d);background:var(--ink)}
+footer .in{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+footer .fb p{font-size:13px;color:var(--muted);margin-top:14px;max-width:300px;line-height:1.65}
+footer .cols{display:flex;gap:56px;flex-wrap:wrap}
+footer h5{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+footer li a{font-size:13.5px;color:var(--text-dim);transition:color .15s}
+footer li a:hover{color:var(--violet)}
+.fbottom{max-width:var(--maxw);margin:44px auto 0;padding:22px 28px 0;border-top:1px solid var(--line-d);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.06em}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a class="brand" href="#top" aria-label="Glenn Carter Frequency Engineering">
+      <svg viewBox="0 0 60 40" fill="none" aria-hidden="true">
+        <path d="M2 20 Q9.5 4 17 20 T32 20 T47 20 T58 20" stroke="#8B7BE8" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <span class="n">Glenn Carter <i>Frequency Engineering</i></span>
+    </a>
+    <div class="nav-links">
+      <a href="#problem">The problem</a>
+      <a href="#inside">What's inside</a>
+      <a href="#series">The series</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#pricing" class="nav-cta">Get the guide →</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="chan">The honest guide to frequency audio</span>
+    <h1>Headphones<br><span class="v">Required.</span></h1>
+    <p class="lead">Most frequency audio on the internet <b>physically cannot do what it claims</b> — and there's a ten-minute test that proves it. Written by an audio engineer with 30 years in binaural production: how it actually works, how to audit any track yourself, and how to practice honestly.</p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn btn-primary">Get the complete guide — €97 →</a>
+      <a href="#free" class="btn btn-ghost">Run the free test first</a>
+    </div>
+    <div class="hero-note">EBOOK + 9-VIDEO SERIES + 3 VERIFIED SESSIONS · INSTANT ACCESS</div>
+  </div>
+
+  <!-- SIGNATURE: stereo waveband -->
+  <div class="waveband" aria-hidden="true">
+    <div class="inner">
+      <div class="ch-label"><span><b>L</b></span><span><b>R</b></span></div>
+      <div class="wave-view">
+        <svg viewBox="0 0 1200 150" preserveAspectRatio="none">
+          <path d="M0,45 Q25,15 50,45 T100,45 T150,45 T200,45 T250,45 T300,45 T350,45 T400,45 T450,45 T500,45 T550,45 T600,45 T650,45 T700,45 T750,45 T800,45 T850,45 T900,45 T950,45 T1000,45 T1050,45 T1100,45 T1150,45 T1200,45" stroke="#8B7BE8" stroke-width="2" fill="none" opacity=".9"/>
+          <path d="M0,105 Q23,75 46,105 T92,105 T138,105 T184,105 T230,105 T276,105 T322,105 T368,105 T414,105 T460,105 T506,105 T552,105 T598,105 T644,105 T690,105 T736,105 T782,105 T828,105 T874,105 T920,105 T966,105 T1012,105 T1058,105 T1104,105 T1150,105 T1200,105" stroke="#4E4192" stroke-width="2" fill="none" opacity=".9"/>
+        </svg>
+      </div>
+      <div class="readout">
+        <div class="r"><span>L CARRIER</span><b>200.0 Hz</b></div>
+        <div class="r"><span>R CARRIER</span><b>206.0 Hz</b></div>
+        <div class="r delta"><span>PERCEIVED Δ</span><b>6.0 Hz · THETA</b></div>
+        <div class="tag">✓ CONSTRUCTION VERIFIED</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat"><b>30 yrs</b><span>In binaural production</span></div>
+    <div class="hstat"><b>14</b><span>Chapters, honestly written</span></div>
+    <div class="hstat"><b>9</b><span>Produced video lessons</span></div>
+    <div class="hstat"><b>6</b><span>Tests in the audit toolkit</span></div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec light" id="problem">
+  <div class="wrap reveal">
+    <span class="chan">CH 01 · The problem</span>
+    <h2>The tools got democratized. The expertise didn't.</h2>
+    <p class="sub">Anyone can generate a tone and upload it under a galaxy thumbnail. The algorithm doesn't run a null test — so nobody checks the file. These are real failure patterns from forensic audits of popular channels:</p>
+
+    <div class="fails">
+      <div class="fail-card">
+        <span class="fc-tag f">FAIL · NOT BINAURAL</span>
+        <h3>The mono "binaural"</h3>
+        <p>Both channels identical. A binaural beat is created by the <em>difference</em> between your ears — no difference, no beat. Ever.</p>
+        <div class="meas">NULL TEST RESIDUAL: −∞ dB<br>BEAT FREQUENCY: none</div>
+      </div>
+      <div class="fail-card">
+        <span class="fc-tag f">FAIL · WRONG BAND</span>
+        <h3>The mislabeled "theta"</h3>
+        <p>Sold as 6 Hz deep-meditation theta. Measured at 11.2 Hz — a different brainwave band entirely. Like ordering espresso and getting chamomile.</p>
+        <div class="meas">CLAIMED: 6.0 Hz THETA<br>MEASURED: Δ 11.2 Hz ALPHA</div>
+      </div>
+      <div class="fail-card">
+        <span class="fc-tag f">FAIL · THEATER</span>
+        <h3>The vanished subliminal</h3>
+        <p>"Powerful affirmations" mixed 52 dB below the bed — beyond any perception threshold. The buyer paid for a whisper and got a rumor of one.</p>
+        <div class="meas">VOICE LAYER: −52 dB rel bed<br>THRESHOLD STANDARD: −18 to −24</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="sec" id="inside">
+  <div class="wrap reveal">
+    <span class="chan">CH 02 · What's inside</span>
+    <h2>Four parts. Fourteen chapters. Zero promises you can't verify.</h2>
+    <p class="sub">Not anti-spirituality — anti-sludge. The practice deserves better engineering, and you deserve to know the difference.</p>
+
+    <div class="parts">
+      <div class="part">
+        <span class="pt">PART I</span>
+        <h3>The Problem</h3>
+        <ol>
+          <li>The Bank-Account Gurus</li>
+          <li>The Test Almost Everything Fails</li>
+          <li>Why This Matters</li>
+        </ol>
+      </div>
+      <div class="part" data-start="4">
+        <span class="pt">PART II</span>
+        <h3>How It Actually Works</h3>
+        <ol>
+          <li>What a Binaural Beat Really Is</li>
+          <li>The Brainwave Bands, Honestly</li>
+          <li>Isochronic, Monaural, Binaural, "8D"</li>
+          <li>The Frequency Myths — 528, 432, Solfeggio</li>
+        </ol>
+      </div>
+      <div class="part" data-start="8">
+        <span class="pt">PART III</span>
+        <h3>The Craft — 30 Years Opened Up</h3>
+        <ol>
+          <li>Anatomy of a Correct Session</li>
+          <li>Subliminals Done Right</li>
+          <li>Listening Practice</li>
+          <li>How to Audit Any Track Yourself</li>
+        </ol>
+      </div>
+      <div class="part" data-start="12">
+        <span class="pt">PART IV</span>
+        <h3>The Practice</h3>
+        <ol>
+          <li>What the Audio Can and Can't Do</li>
+          <li>A 30-Day Honest Protocol</li>
+          <li>Building or Buying — the Standard to Demand</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SERIES -->
+<section class="sec" id="series" style="padding-top:0">
+  <div class="wrap reveal">
+    <span class="chan">CH 03 · The video series</span>
+    <h2>Nine lessons, produced like the sessions they describe.</h2>
+    <p class="sub">Avatar-presented, every measured number on screen. The production quality is itself the demonstration.</p>
+
+    <div class="vlist">
+      <div class="vrow"><span class="vn">V·01</span><div><div class="vt">90% of Frequency Audio Fails This 10-Minute Test</div><div class="vd">The mono-sum test — run it on your own library tonight</div></div><span class="vlen">8 min</span><span class="vfree">FREE</span></div>
+      <div class="vrow"><span class="vn">V·02</span><div><div class="vt">What a Binaural Beat Actually Is</div><div class="vd">Two carriers, two ears, one brain — and the three rules</div></div><span class="vlen">7 min</span><span class="vfree">FREE</span></div>
+      <div class="vrow"><span class="vn">V·03</span><div><div class="vt">Delta, Theta, Alpha, Beta — The Honest Version</div><div class="vd">The decoder ring for every track title you'll ever see</div></div><span class="vlen">9 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·04</span><div><div class="vt">Binaural vs. Isochronic vs. "8D" — One Is a Lie</div><div class="vd">Why "8D binaural" is a waterproof teabag</div></div><span class="vlen">8 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·05</span><div><div class="vt">528 Hz, 432 Hz, and the Solfeggio Myth</div><div class="vd">The documented history — love the tones, verify the claims</div></div><span class="vlen">10 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·06</span><div><div class="vt">Anatomy of a Correct Session — Built Live</div><div class="vd">A full theta session constructed on screen, every number shown</div></div><span class="vlen">12 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·07</span><div><div class="vt">Subliminals: The Most Abused Layer in Audio</div><div class="vd">Threshold engineering, and the full-script-disclosure rule</div></div><span class="vlen">9 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·08</span><div><div class="vt">Audit Any Track Yourself — The Full Toolkit</div><div class="vd">Six tests, free software, fifteen minutes per track</div></div><span class="vlen">11 min</span><span class="vlock">€97 TIER</span></div>
+      <div class="vrow"><span class="vn">V·09</span><div><div class="vt">What Frequency Audio Can Actually Do</div><div class="vd">The honest ceiling — and the 30-day protocol</div></div><span class="vlen">10 min</span><span class="vlock">€97 TIER</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE TEST -->
+<section class="freeband" id="free">
+  <div class="wrap">
+    <div class="in reveal">
+      <div>
+        <span class="chan">Free before you buy anything</span>
+        <h2>Run the 10-minute test on your own library first.</h2>
+        <p>Chapter 2 and Video 1 are free: the mono-sum test, step by step, with free software. If your favorite track passes — wonderful, keep it. If it fails, you deserved to know.</p>
+        <form class="free-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Sent ✓';this.querySelector('input').value=''">
+          <input type="email" placeholder="Your email" required aria-label="Email address">
+          <button type="submit" class="btn btn-primary">Send the test</button>
+        </form>
+      </div>
+      <div class="testcard" aria-hidden="true">
+        <div class="tc-h">YOUR LIBRARY · SAMPLE RESULTS</div>
+        <div><span class="dim">01</span> <span class="w">deep_theta_journey.mp3</span> <span class="bad">— MONO · FAIL</span></div>
+        <div><span class="dim">02</span> <span class="w">528hz_abundance.wav</span> <span class="bad">— Δ 0.0 Hz · FAIL</span></div>
+        <div><span class="dim">03</span> <span class="w">alpha_focus_30min.mp3</span> <span class="ok">— Δ 10.1 Hz · PASS</span></div>
+        <div><span class="dim">04</span> <span class="w">money_magnet_8d.mp3</span> <span class="bad">— PAN DESTROYS Δ · FAIL</span></div>
+        <div><span class="dim">05</span> <span class="w">sleep_delta_2.5hz.wav</span> <span class="ok">— Δ 2.5 Hz · PASS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec light" id="pricing">
+  <div class="wrap reveal">
+    <span class="chan">CH 04 · Get the guide</span>
+    <h2>One-time purchase. Yours forever.</h2>
+    <p class="sub">No subscription, no upsell funnel inside the product, no locked "secret masterclass." You buy it, you own it.</p>
+
+    <div class="pricing">
+      <div class="price-card">
+        <span class="tn">The Book</span>
+        <h3>Headphones Required — eBook</h3>
+        <div class="pr"><b>€47</b><span>one-time</span></div>
+        <div class="once">PDF · ~120 pages · instant download</div>
+        <ul>
+          <li>All 14 chapters, all four parts</li>
+          <li>The complete 6-test audit toolkit with scorecards</li>
+          <li>The frequency-myth histories, with citations</li>
+          <li>The 30-day honest protocol + practice journal</li>
+          <li>Free-tools appendix and research reading list</li>
+          <li class="na">Video series</li>
+          <li class="na">Verified demonstration sessions</li>
+        </ul>
+        <a href="#" class="btn btn-light">Get the book — €47</a>
+      </div>
+
+      <div class="price-card featured">
+        <span class="best">MOST COMPLETE</span>
+        <span class="tn">Book + Series + Sessions</span>
+        <h3>The Complete Edition</h3>
+        <div class="pr"><b>€97</b><span>one-time</span></div>
+        <div class="once">Everything in the book, plus:</div>
+        <ul>
+          <li><b>All 9 produced video lessons</b> — including the live session build and the full audit walkthrough</li>
+          <li><b>3 verified sessions</b> (theta · alpha · delta), each shipped with its construction certificate — carriers, beat, ramps documented</li>
+          <li>The subliminal standard card + full script disclosure of every affirmation layer</li>
+          <li>Printable audit scorecards and the session-construction checklist</li>
+          <li>Free updates to future editions</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Get the complete edition — €97 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST CEILING -->
+<section class="sec">
+  <div class="wrap reveal">
+    <span class="chan">CH 05 · Claims discipline</span>
+    <h2>Held to the same standard it teaches.</h2>
+    <p class="sub">This guide never promises outcomes — it demonstrates construction. Here is the honest ceiling, stated up front:</p>
+
+    <div class="ceiling">
+      <div class="ceil can">
+        <span class="ch2">✓ WHAT THE AUDIO CAN DO</span>
+        <ul>
+          <li>Help you settle into relaxation faster</li>
+          <li>Support sleep onset — the descent, the letting go</li>
+          <li>Hold a focus state steadier during work</li>
+          <li>Deepen entry into meditative and visualization practice</li>
+        </ul>
+      </div>
+      <div class="ceil cant">
+        <span class="ch2">× WHAT IT CANNOT DO</span>
+        <ul>
+          <li>Act on the world for you — no deposits, no partners, no "manifestation on autopilot"</li>
+          <li>Repair DNA or replace medical care</li>
+          <li>Substitute for the mental work done inside the state</li>
+          <li>Work over speakers, if it's binaural — physics doesn't negotiate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="author">
+      <div class="sigcard">
+        <div class="sh">AUTHOR · CONSTRUCTION CERTIFICATE</div>
+        <div><span class="k">NAME</span> &nbsp;<span class="v">Glenn Carter</span></div>
+        <div><span class="k">FIELD</span> &nbsp;<span class="v">Audio production &amp; engineering</span></div>
+        <div><span class="k">EXPERIENCE</span> &nbsp;<span class="hl">30+ years</span> <span class="v">— binaural, subliminal, session design</span></div>
+        <div><span class="k">METHOD</span> &nbsp;<span class="v">Measured, not claimed</span></div>
+        <div><span class="k">STANDARD</span> &nbsp;<span class="v">Every session ships with its certificate</span></div>
+      </div>
+      <div>
+        <span class="chan">CH 06 · Who's behind this</span>
+        <h2 style="font-size:clamp(26px,3.4vw,38px)">Thirty years in. Still wearing headphones. Still doing the work.</h2>
+        <p>I was building binaural sessions before YouTube existed — for artists, brands, and private clients. I watched the tools get easy and the flood arrive. <b>This guide exists because the practice deserves better than the sludge</b>, and because you shouldn't need thirty years of engineering to know whether the audio you bought is real.</p>
+        <p>For creators: I also run forensic catalog audits and produce verified sessions professionally. Every deliverable ships with its construction certificate — the same standard this book teaches you to demand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap reveal">
+    <span class="chan">CH 07 · Questions</span>
+    <h2 style="font-size:clamp(26px,3.4vw,38px)">Fair questions, straight answers.</h2>
+    <div class="faq">
+      <details>
+        <summary>Is this anti-manifestation / anti-spirituality?</summary>
+        <p>No. It's anti-fakery. The book's position is that theta-state visualization and affirmation practices are worth doing properly — and that the flood of broken audio and invented histories disrespects the practice more than any skeptic ever could. Love the tones. Verify the claims.</p>
+      </details>
+      <details>
+        <summary>Do I need expensive headphones or software?</summary>
+        <p>No. Any headphones that isolate left from right will deliver a binaural beat — the physics doesn't care about the brand. The audit toolkit uses Audacity, which is free. Total required budget beyond the guide: zero.</p>
+      </details>
+      <details>
+        <summary>What are the "verified sessions" in the €97 tier?</summary>
+        <p>Three complete sessions (theta, alpha, delta) produced to the standard the book teaches: proper carriers, entrainment ramps in and out, use-case loudness, and a construction certificate documenting every number — plus the full printed script of any affirmation layer. You can run the book's own audit toolkit on them. That's the point.</p>
+      </details>
+      <details>
+        <summary>Will this tell me my favorite channel is fake?</summary>
+        <p>It will show you how to measure — the verdict comes from the file, not from me. Some popular tracks pass beautifully. Many don't. Either way, you'll know in fifteen minutes instead of taking it on faith.</p>
+      </details>
+      <details>
+        <summary>Refunds?</summary>
+        <p>14 days, no questions. If the guide doesn't change how you evaluate frequency audio, write and get your money back.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap reveal">
+    <span class="chan">Last channel</span>
+    <h2>Verify the work.<br>Then <span class="v">do the work.</span></h2>
+    <p>Fourteen chapters, nine lessons, three verified sessions, one standard. Everything measured, nothing promised.</p>
+    <div class="final-actions">
+      <a href="#pricing" class="btn btn-light">Get the complete edition — €97 →</a>
+      <a href="#free" class="btn btn-ghost" style="color:var(--paper-ink);border-color:var(--line-l)">Start with the free test</a>
+    </div>
+    <div class="tiny">ONE-TIME PURCHASE · 14-DAY REFUND · INSTANT ACCESS</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap in" style="display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start">
+    <div class="fb">
+      <a class="brand" href="#top">
+        <svg viewBox="0 0 60 40" fill="none" aria-hidden="true" style="width:30px;height:20px">
+          <path d="M2 20 Q9.5 4 17 20 T32 20 T47 20 T58 20" stroke="#8B7BE8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="n" style="font-family:'Space Grotesk';font-weight:600;font-size:15px">Glenn Carter <i style="font-style:normal;color:var(--violet)">Frequency Engineering</i></span>
+      </a>
+      <p>Honest engineering for frequency audio. Every session ships with its construction certificate.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h5>This guide</h5>
+        <ul>
+          <li><a href="#inside">Chapters</a></li>
+          <li><a href="#series">Video series</a></li>
+          <li><a href="#free">The free test</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Professional</h5>
+        <ul>
+          <li><a href="#">The Frequency Audit</a></li>
+          <li><a href="#">Signature session production</a></li>
+          <li><a href="#">The certificate standard</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="#">Email</a></li>
+          <li><a href="#">Refund policy</a></li>
+          <li><a href="#">Terms &amp; privacy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="fbottom">
+    <span>© 2026 Glenn Carter · Frequency Engineering</span>
+    <span>MEASURED · NOT CLAIMED</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

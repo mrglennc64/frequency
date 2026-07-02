@@ -47,7 +47,8 @@ Page prose and spoken prose are different animals. We do **not** narrate the cha
 **Recommendation:** clone your own voice (option 2). It keeps the authenticity of option 1 with the throughput you need for 10 videos + an audiobook.
 
 ### Tooling & what it needs
-- **Voice-clone/TTS:** ElevenLabs is the current quality leader for cloned narration (competitors exist; ElevenLabs is the safe default). It needs a few minutes of **clean, consistent** audio to build the model — quiet room, one mic, no music, natural pace. The *same* recording session that gives me your Stage-1 talking sample can double as the clone's training data — record it well and it serves both stages.
+- **Voice-clone/TTS:** ElevenLabs. **Voice ID: `tXoAX6rzg9vkoUfJKy0k`** — this is the narration voice for the whole series; every script header references it. It needs a few minutes of **clean, consistent** audio to build/refine the model — quiet room, one mic, no music, natural pace. The *same* recording session that gives me your Stage-1 talking sample can double as the clone's training data — record it well and it serves both stages.
+  - *TTS prep:* the script files under `../videos/scripts/` are spoken-adapted. Before pasting into ElevenLabs, strip the `[SCREEN: …]` and `[pause]` direction lines — those are for the editor/avatar, not the voice. Spoken paragraphs are the TTS input.
 - **Pipeline fit:** cloned VO → your avatar/visual pipeline → captions (muted-autoplay audience) → the audit design system for lower-thirds and diagrams, per `../videos/script-template.md`.
 - **This session's limit:** I can't generate or clone audio here (no audio tool is connected). What I do is produce the *scripts* — the calibrated, spoken-adapted words the voice reads. You (or a later session with the right tool) run the actual cloning/render.
 

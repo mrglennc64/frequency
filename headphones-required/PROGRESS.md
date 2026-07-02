@@ -37,11 +37,11 @@ Update this table as work completes; it is the single source of truth for launch
 
 | Deliverable | File | Target week | Status |
 |---|---|---|---|
-| V1 — The 10-Minute Test (public) | `videos/v01-the-10-minute-test.md` | W3 (Jul 20–26) | not started |
-| V2 — What a Binaural Beat Really Is | `videos/v02-what-a-binaural-beat-really-is.md` | W5 (Aug 3–9) | not started |
-| V3 — The Brainwave Bands, Honestly | `videos/v03-the-brainwave-bands-honestly.md` | W5 (Aug 3–9) | not started |
-| V4 — Isochronic, Monaural, Binaural, "8D" | `videos/v04-isochronic-monaural-binaural-8d.md` | W5 (Aug 3–9) | not started |
-| V5 — The Frequency Myths | `videos/v05-the-frequency-myths.md` | W5 (Aug 3–9) | not started |
+| V1 — The 10-Minute Test (public) | brief `videos/v01-…md` · **script `videos/scripts/v01-…-script.md`** | W3 (Jul 20–26) | script drafted (Jul 2) — narration/render pending |
+| V2 — What a Binaural Beat Really Is | brief + **script `videos/scripts/v02-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
+| V3 — The Brainwave Bands, Honestly | brief + **script `videos/scripts/v03-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
+| V4 — Isochronic, Monaural, Binaural, "8D" | brief + **script `videos/scripts/v04-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
+| V5 — The Frequency Myths | brief + **script `videos/scripts/v05-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
 | V6 — Anatomy of a Correct Session | `videos/v06-anatomy-of-a-correct-session.md` | W6 / post-launch drip | not started |
 | V7 — Subliminals Done Right | `videos/v07-subliminals-done-right.md` | W6 / post-launch drip | not started |
 | V8 — Audit Any Track Yourself | `videos/v08-audit-any-track-yourself.md` | W6 / post-launch drip | not started |
@@ -53,7 +53,8 @@ Update this table as work completes; it is the single source of truth for launch
 | Deliverable | File / location | Target week | Status |
 |---|---|---|---|
 | Lead-magnet PDF (Ch. 2 standalone) | `lead-magnet/spec.md` → designed PDF | W3 (Jul 20–26) | not started |
-| Opt-in landing page + email capture | per `launch/funnel-checklist.md` | W3 (Jul 20–26) | not started |
+| Opt-in landing page + email capture | `launch/pages/opt-in.html` | W3 (Jul 20–26) | example drafted (Jul 2) — wire ESP/video/links |
+| Narration voice (ElevenLabs) | `voice/VOICE-GUIDE.md` — voice ID `tXoAX6rzg9vkoUfJKy0k` | — | ID set; Glenn records sample Jul 3 |
 | Sales page (€47 / €97) | per `launch/funnel-checklist.md` | W6 (Aug 10–16) | not started |
 | 3 verified demonstration sessions (€97 tier) | audio + certificates | W5–W6 | not started |
 | Fact-check pass (Ch. 5, 7, 12, App. C) | — | W6 hard gate | not started |
