@@ -1,0 +1,5 @@
+https://github.com/mrglennc64/frequency
+
+Done — freq.usesmpt.com now points to 46.202.143.253.
+
+SSH into kv8 — working now. ssh kv8 (new alias I just added and verified → srv1786182) or ssh newvps (same box). Both use 46.202.143.253 with your ~/.ssh/traproyalties_ed25519 key
