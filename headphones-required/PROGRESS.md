@@ -5,27 +5,33 @@ Statuses: `not started` → `drafted` → `reviewed` → `designed` → `done`
 
 Update this table as work completes; it is the single source of truth for launch readiness.
 
+> **Snapshot — Jul 2, 2026:** Complete first draft of the full manuscript (14 chapters + 3 appendices) written and pushed to GitHub, well ahead of the 6-week calendar. Research-claim chapters (4, 5, 7, 9, 12) have had their citation pass and are backed by verified sources in Appendix C (3 minor items still flagged TO ADD/CONFIRM). **Not yet done:** human review pass, the design/layout pass in the report-engine style, all diagrams (8.2/8.3, sample certificate, journal template), the video productions, the lead-magnet PDF build, the sales/opt-in pages, and the 3 demonstration sessions. Each chapter file holds its draft prose above an archived working brief.
+
 ## Manuscript
 
 | Deliverable | File | Target week | Status |
 |---|---|---|---|
-| Ch. 1 — The Bank-Account Gurus | `manuscript/part-1/01-the-bank-account-gurus.md` | W4 (Jul 27–Aug 2) | not started |
-| Ch. 2 — The Test Almost Everything Fails | `manuscript/part-1/02-the-test-almost-everything-fails.md` | W3 lead magnet → W4 back-port | not started |
-| Ch. 3 — Why This Matters | `manuscript/part-1/03-why-this-matters.md` | W4 (Jul 27–Aug 2) | not started |
-| Ch. 4 — What a Binaural Beat Really Is | `manuscript/part-2/04-what-a-binaural-beat-really-is.md` | W1 (Jul 6–12) | drafted (Jul 2) |
-| Ch. 5 — The Brainwave Bands, Honestly | `manuscript/part-2/05-the-brainwave-bands-honestly.md` | W1 (Jul 6–12) | drafted (Jul 2) — citation pass pending |
-| Ch. 6 — Isochronic, Monaural, Binaural, "8D" | `manuscript/part-2/06-isochronic-monaural-binaural-8d.md` | W2 (Jul 13–19) | drafted (Jul 2) |
-| Ch. 7 — The Frequency Myths (incl. Rife) | `manuscript/part-2/07-the-frequency-myths.md` | W2 (Jul 13–19) | drafted (Jul 2) — fact-check pass pending |
-| Ch. 8 — Anatomy of a Correct Session | `manuscript/part-3/08-anatomy-of-a-correct-session.md` | W4 (Jul 27–Aug 2) | not started |
-| Ch. 9 — Subliminals Done Right | `manuscript/part-3/09-subliminals-done-right.md` | W4 (Jul 27–Aug 2) | not started |
-| Ch. 10 — Listening Practice | `manuscript/part-3/10-listening-practice.md` | W5 (Aug 3–9) | not started |
-| Ch. 11 — How to Audit Any Track Yourself | `manuscript/part-3/11-how-to-audit-any-track-yourself.md` | W5 (Aug 3–9) | not started |
-| Ch. 12 — What the Audio Can and Can't Do | `manuscript/part-4/12-what-the-audio-can-and-cant-do.md` | W6 (Aug 10–16) | not started |
-| Ch. 13 — A 30-Day Protocol | `manuscript/part-4/13-a-30-day-protocol.md` | W6 (Aug 10–16) | not started |
-| Ch. 14 — Building or Buying | `manuscript/part-4/14-building-or-buying.md` | W6 (Aug 10–16) | not started |
-| Appendix A — Verified Session Standard | `manuscript/appendices/a-verified-session-standard.md` | W6 (Aug 10–16) | not started |
-| Appendix B — Free Analysis Tools | `manuscript/appendices/b-free-analysis-tools.md` | W6 (Aug 10–16) | not started |
-| Appendix C — Research Reading List | `manuscript/appendices/c-research-reading-list.md` | W6 (Aug 10–16) | not started |
+**All 14 chapters + 3 appendices drafted Jul 2, 2026 (ahead of the 6-week calendar). Next stage is the review + design pass, not first drafts.**
+
+| Deliverable | File | Target week | Status |
+|---|---|---|---|
+| Ch. 1 — The Bank-Account Gurus | `manuscript/part-1/01-the-bank-account-gurus.md` | W4 (Jul 27–Aug 2) | drafted (Jul 2) — review pending |
+| Ch. 2 — The Test Almost Everything Fails | `manuscript/part-1/02-the-test-almost-everything-fails.md` | W3 lead magnet → W4 back-port | drafted (Jul 2) — is lead-magnet master |
+| Ch. 3 — Why This Matters | `manuscript/part-1/03-why-this-matters.md` | W4 (Jul 27–Aug 2) | drafted (Jul 2) — review pending |
+| Ch. 4 — What a Binaural Beat Really Is | `manuscript/part-2/04-what-a-binaural-beat-really-is.md` | W1 (Jul 6–12) | drafted (Jul 2) — citations verified |
+| Ch. 5 — The Brainwave Bands, Honestly | `manuscript/part-2/05-the-brainwave-bands-honestly.md` | W1 (Jul 6–12) | drafted (Jul 2) — citations verified (App. C) |
+| Ch. 6 — Isochronic, Monaural, Binaural, "8D" | `manuscript/part-2/06-isochronic-monaural-binaural-8d.md` | W2 (Jul 13–19) | drafted (Jul 2) — review pending |
+| Ch. 7 — The Frequency Myths (incl. Rife) | `manuscript/part-2/07-the-frequency-myths.md` | W2 (Jul 13–19) | drafted (Jul 2) — history/Rife citations verified |
+| Ch. 8 — Anatomy of a Correct Session | `manuscript/part-3/08-anatomy-of-a-correct-session.md` | W4 (Jul 27–Aug 2) | drafted (Jul 2) — diagrams 8.2/8.3 for design pass |
+| Ch. 9 — Subliminals Done Right | `manuscript/part-3/09-subliminals-done-right.md` | W4 (Jul 27–Aug 2) | drafted (Jul 2) — Greenwald/Vicary verified |
+| Ch. 10 — Listening Practice | `manuscript/part-3/10-listening-practice.md` | W5 (Aug 3–9) | drafted (Jul 2) — review pending |
+| Ch. 11 — How to Audit Any Track Yourself | `manuscript/part-3/11-how-to-audit-any-track-yourself.md` | W5 (Aug 3–9) | drafted (Jul 2) — review pending |
+| Ch. 12 — What the Audio Can and Can't Do | `manuscript/part-4/12-what-the-audio-can-and-cant-do.md` | W6 (Aug 10–16) | drafted (Jul 2) — citations verified |
+| Ch. 13 — A 30-Day Protocol | `manuscript/part-4/13-a-30-day-protocol.md` | W6 (Aug 10–16) | drafted (Jul 2) — journal = design asset |
+| Ch. 14 — Building or Buying | `manuscript/part-4/14-building-or-buying.md` | W6 (Aug 10–16) | drafted (Jul 2) — review pending |
+| Appendix A — Verified Session Standard | `manuscript/appendices/a-verified-session-standard.md` | W6 (Aug 10–16) | drafted (Jul 2) — sample cert = design asset |
+| Appendix B — Free Analysis Tools | `manuscript/appendices/b-free-analysis-tools.md` | W6 (Aug 10–16) | drafted (Jul 2) — ⚠ re-verify tool steps + screenshots |
+| Appendix C — Research Reading List | `manuscript/appendices/c-research-reading-list.md` | W6 (Aug 10–16) | drafted (Jul 2) — sources verified; 3 items TO ADD/CONFIRM |
 
 ## Videos
 
