@@ -42,11 +42,13 @@ Update this table as work completes; it is the single source of truth for launch
 | V3 — The Brainwave Bands, Honestly | brief + **script `videos/scripts/v03-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
 | V4 — Isochronic, Monaural, Binaural, "8D" | brief + **script `videos/scripts/v04-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
 | V5 — The Frequency Myths | brief + **script `videos/scripts/v05-…-script.md`** | W5 (Aug 3–9) | script drafted (Jul 2) — narration/render pending |
-| V6 — Anatomy of a Correct Session | `videos/v06-anatomy-of-a-correct-session.md` | W6 / post-launch drip | not started |
-| V7 — Subliminals Done Right | `videos/v07-subliminals-done-right.md` | W6 / post-launch drip | not started |
-| V8 — Audit Any Track Yourself | `videos/v08-audit-any-track-yourself.md` | W6 / post-launch drip | not started |
-| V9 — The 30-Day Protocol | `videos/v09-the-30-day-protocol.md` | W6 / post-launch drip | not started |
-| V10 — How to Vet Any Creator | `videos/v10-how-to-vet-any-creator.md` | W6 / post-launch drip | not started |
+| V6 — Anatomy of a Correct Session | brief + **script `videos/scripts/v06-…-script.md`** | W6 / post-launch drip | script drafted (Jul 2) — narration/render pending |
+| V7 — Subliminals Done Right | brief + **script `videos/scripts/v07-…-script.md`** | W6 / post-launch drip | script drafted (Jul 2) — narration/render pending |
+| V8 — Audit Any Track Yourself | brief + **script `videos/scripts/v08-…-script.md`** | W6 / post-launch drip | script drafted (Jul 2) — narration/render pending |
+| V9 — The 30-Day Protocol | brief + **script `videos/scripts/v09-…-script.md`** | W6 / post-launch drip | script drafted (Jul 2) — narration/render pending |
+| V10 — How to Vet Any Creator | brief + **script `videos/scripts/v10-…-script.md`** | W6 / post-launch drip | script drafted (Jul 2) — narration/render pending |
+
+**All 10 narration scripts drafted + clean read-aloud pack (`videos/scripts/READ-ALOUD.md`) ready for Glenn's recording session.**
 
 ## Lead magnet, pages, launch
 
