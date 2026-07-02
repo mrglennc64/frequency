@@ -15,6 +15,9 @@ The construction-certificate specification, published openly. Strategic double d
 - **What the certificate does NOT claim** — no outcome promises; it verifies construction, not results (Ch. 12 discipline applies to the standard itself)
 - A filled-in sample certificate for one of the €97 tier's demonstration sessions (design pass produces this)
 
+## Build-to-spec sessions (the honest home for "requested frequencies")
+The certificate is what makes it possible to sell someone the exact frequency they ask for — Rife values, organ/body-part frequency sets, a specific Solfeggio tone — *without* attaching a claim to it. The standard's discipline does the work: the certificate documents precisely what was generated (tone/carrier/beat, ramp, level) and, by design, **verifies construction, not results.** So a build-to-spec session reads: *"You requested [frequency]. Here it is, engineered correctly and documented below. This certifies the build; it makes no therapeutic claim."* This is the audit's passing Chakra Suite precedent formalized — honest labeling backed by a verifiable spec. State explicitly here that no Verified Session certificate may carry a health/cure claim; the standard forbids it, which is exactly why adopting the standard is a credibility signal.
+
 ## Reuse
 Forge spec §2.4 is the master; this appendix is its public prose form. Any drift between the two damages both — check at the Week 6 fact-check gate.
 

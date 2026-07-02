@@ -4,6 +4,8 @@
 ## ⚠ Open decision — resolve by end of Week 3 (Jul 26)
 **Platform: Gumroad vs. own site** (per f1.pdf both are options). Decides where the opt-in page points, how the €47/€97 split is delivered, and whether the video series drips natively. Decision owner: Glenn. Logged here when made: ______
 
+**Own-site infrastructure already available (as of Jul 2, 2026):** `freq.usesmpt.com` → `46.202.143.253` (VPS srv1786182, `ssh kv8` / `ssh newvps`). Site can host the opt-in page and lead-magnet delivery even if checkout stays on Gumroad — a hybrid is a valid resolution of this decision.
+
 ## The chain (top to bottom — verify every arrow before launch day)
 
 ### 1. Traffic → Lead magnet (live from Week 3, before the book)

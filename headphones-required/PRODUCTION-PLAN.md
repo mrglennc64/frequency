@@ -119,6 +119,10 @@ Videos: scripted → produced (avatar pipeline) → captioned/QC'd → uploaded 
 
 ---
 
+## Product decision log
+
+- **Jul 2, 2026 — Rife / organ / body-part frequencies:** covered honestly, offered honestly. (1) Ch. 7 gets a dedicated Rife section: the 1930s history, the evidence gap, and the category error (Rife's claims concerned RF plasma devices, not audio playback — "Rife audio" is a double leap). (2) Demand is served with **build-to-spec sessions**: the requested frequencies engineered correctly (real carriers/beats, ramps, certificate) and labeled like the audit's passing Chakra Suite — *"the frequencies you asked for, built correctly; no therapeutic claim made."* No organ-healing marketing anywhere in the funnel; the standing disclaimer (educational audio engineering, not medical advice) applies with extra force to these SKUs. Candidate placement: an add-on session pack post-launch + a FrequencyForge "requested frequency" preset category (Glenn to decide Forge scope).
+
 ## Risks & rules of engagement
 
 - **Christina comes first.** If delivery work collides with book work, the slip absorbs into Week 3's second half and Week 5 — the lead magnet is the most compressible sprint (Ch. 2 + one video). Weeks 1–2 (Part II) should be protected; they're the foundation everything else quotes.
