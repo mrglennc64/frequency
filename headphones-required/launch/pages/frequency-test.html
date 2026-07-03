@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Frequency Test · Is your track really binaural? · Frequency Engineering</title>
+<!-- 100% client-side. Decodes an audio file, measures L/R carriers via FFT, gives a forensic verdict.
+     Same logic as Chapter 11 of Headphones Required. No upload, no backend, no account. -->
+<style>
+  :root{--indigo:#4f46e5;--indigo-deep:#3730a3;--purple:#7c3aed;--ink:#1e1b2e;--muted:#6b6880;--line:#e6e4f0;--bg:#faf9fe;--card:#fff;
+        --ok:#0f766e;--ok-bg:#ecfdf5;--ok-line:#a7f3d0;--warn:#b45309;--warn-bg:#fffbeb;--warn-line:#fde68a;--bad:#b91c1c;--bad-bg:#fef2f2;--bad-line:#fecaca;--maxw:900px;}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+  a{color:var(--indigo)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  header.site{display:flex;align-items:center;gap:10px;padding:20px 0;border-bottom:1px solid var(--line)}
+  header.site .word{font-weight:700}
+  header.site .word span{color:var(--indigo)}
+  .eyebrow{color:var(--indigo-deep);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12.5px;margin:34px 0 12px}
+  h1{font-size:clamp(28px,4.6vw,44px);line-height:1.1;margin:0 0 .35em;letter-spacing:-.01em}
+  h1 .u{background:linear-gradient(transparent 62%,#ede9fe 62%)}
+  .sub{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:36em}
+  #drop{margin:28px 0 8px;border:2px dashed #c7c2ee;border-radius:16px;background:var(--card);padding:40px 24px;text-align:center;cursor:pointer;transition:.15s}
+  #drop:hover,#drop.over{border-color:var(--indigo);background:#f5f3ff}
+  #drop .big{font-size:19px;font-weight:600;margin:6px 0}
+  #drop .hint{color:var(--muted);font-size:14px}
+  .privacy{font-size:13px;color:var(--muted);text-align:center;margin:6px 0 0}
+  .privacy b{color:var(--ok)}
+  #status{text-align:center;color:var(--muted);margin:16px 0;min-height:1.2em}
+  #results{display:none;margin:22px 0}
+  .verdict{border-radius:14px;padding:22px 24px;margin-bottom:18px;border:1px solid}
+  .verdict.pass{background:var(--ok-bg);border-color:var(--ok-line)}
+  .verdict.warn{background:var(--warn-bg);border-color:var(--warn-line)}
+  .verdict.fail{background:var(--bad-bg);border-color:var(--bad-line)}
+  .verdict .tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:999px;color:#fff}
+  .verdict.pass .tag{background:var(--ok)} .verdict.warn .tag{background:var(--warn)} .verdict.fail .tag{background:var(--bad)}
+  .verdict h2{margin:12px 0 6px;font-size:22px}
+  .verdict p{margin:0;color:#3b3652}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 18px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat b{display:block;font-size:22px;color:var(--purple);line-height:1.15}
+  .stat span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+  canvas{width:100%;height:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;display:block}
+  .caplabel{display:flex;gap:18px;justify-content:center;font-size:13px;color:var(--muted);margin:8px 0 0}
+  .caplabel i{width:12px;height:3px;display:inline-block;border-radius:2px;vertical-align:middle;margin-right:5px}
+  .note{background:#f5f3ff;border-left:4px solid var(--purple);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;color:#3b356b;font-size:15px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 0}
+  .btn{display:inline-block;background:var(--indigo);color:#fff;border-radius:10px;padding:13px 22px;font-weight:700;text-decoration:none}
+  .btn.ghost{background:#fff;color:var(--indigo);border:1px solid var(--indigo)}
+  .btn:hover{filter:brightness(.96)}
+  footer{padding:30px 0 56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:26px}
+  footer .disc{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:11px;color:#8a86a3;text-align:center;margin-bottom:12px}
+  pre#selftest-output{white-space:pre-wrap;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <svg width="26" height="26" viewBox="0 0 40 40" aria-hidden="true"><path d="M2 20q6-16 12 0t12 0 12 0" fill="none" stroke="#4f46e5" stroke-width="3" stroke-linecap="round"/></svg>
+    <div class="word">Glenn Carter <span>Frequency Engineering</span></div>
+  </header>
+
+  <p class="eyebrow">Free · The Frequency Test</p>
+  <h1>Is your track <span class="u">really binaural?</span><br>Find out in ten seconds.</h1>
+  <p class="sub">Drop in any "binaural" audio file. This measures the left and right carriers and tells you whether there's a real two-tone build — or whether you bought a label. It's the same first check I run on paying clients' catalogs.</p>
+
+  <div id="drop" tabindex="0" role="button" aria-label="Choose or drop an audio file">
+    <div class="big">Drop an audio file here</div>
+    <div class="hint">…or click to choose · WAV, MP3, FLAC, M4A, OGG</div>
+    <input id="file" type="file" accept="audio/*" hidden>
+  </div>
+  <p class="privacy">🔒 <b>Your file never leaves your device.</b> All analysis runs in your browser. Nothing is uploaded.</p>
+  <div id="status"></div>
+
+  <section id="results" aria-live="polite">
+    <div class="verdict" id="verdict"><span class="tag" id="vtag"></span><h2 id="vtitle"></h2><p id="vdetail"></p></div>
+    <div class="stats">
+      <div class="stat"><b id="s-left">—</b><span>Left carrier</span></div>
+      <div class="stat"><b id="s-right">—</b><span>Right carrier</span></div>
+      <div class="stat"><b id="s-beat">—</b><span>Beat frequency</span></div>
+      <div class="stat"><b id="s-band">—</b><span>Brainwave band</span></div>
+    </div>
+    <canvas id="spectrum" width="860" height="180"></canvas>
+    <div class="caplabel"><span><i style="background:#4f46e5"></i>Left channel</span><span><i style="background:#7c3aed"></i>Right channel</span><span>0–1000 Hz</span></div>
+
+    <div class="note">
+      <strong>This is Check 1 of 5.</strong> A pass here proves real two-carrier construction — it does <em>not</em> prove the beat matches the band on the label, that the session ramps properly, that any "subliminal" exists, or that the frequency claims mean anything. That's the full five-point audit, and it's Chapter 11 of the book.
+      <div class="cta">
+        <a class="btn" href="/The-10-Minute-Test.pdf" download>Get the full test (free PDF)</a>
+        <a class="btn ghost" href="/">About the book</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="disc">Educational audio-engineering analysis — not medical or therapeutic advice</p>
+    <p>The beat in a binaural track is built inside your head from the difference between two tones, one per ear — so a genuine binaural file must contain two different carriers. This tool measures whether it does. © Glenn Carter · Frequency Engineering.</p>
+    <pre id="selftest-output" hidden></pre>
+  </footer>
+</div>
+
+<script>
+"use strict";
+// ---------- FFT (iterative radix-2 Cooley–Tukey, in-place) ----------
+function fft(re, im){
+  const n = re.length;
+  for (let i=1, j=0; i<n; i++){
+    let bit = n>>1;
+    for (; j & bit; bit>>=1) j ^= bit;
+    j ^= bit;
+    if (i<j){ const tr=re[i];re[i]=re[j];re[j]=tr; const ti=im[i];im[i]=im[j];im[j]=ti; }
+  }
+  for (let len=2; len<=n; len<<=1){
+    const ang = -2*Math.PI/len, wr=Math.cos(ang), wi=Math.sin(ang);
+    for (let i=0;i<n;i+=len){
+      let cwr=1, cwi=0;
+      for (let k=0;k<len>>1;k++){
+        const a=i+k, b=a+(len>>1);
+        const vr=re[b]*cwr - im[b]*cwi, vi=re[b]*cwi + im[b]*cwr;
+        re[b]=re[a]-vr; im[b]=im[a]-vi; re[a]+=vr; im[a]+=vi;
+        const t=cwr*wr - cwi*wi; cwi=cwr*wi + cwi*wr; cwr=t;
+      }
+    }
+  }
+}
+const NFFT = 32768;
+// magnitude spectrum of the middle chunk of a channel (Hann-windowed)
+function spectrumOf(data, sampleRate){
+  const re=new Float64Array(NFFT), im=new Float64Array(NFFT);
+  const start=Math.max(0, (data.length>>1) - (NFFT>>1));
+  const len=Math.min(NFFT, data.length-start);
+  for (let i=0;i<len;i++){ const w=0.5*(1-Math.cos(2*Math.PI*i/(NFFT-1))); re[i]=data[start+i]*w; }
+  fft(re, im);
+  const half=NFFT>>1, mag=new Float64Array(half);
+  for (let b=0;b<half;b++) mag[b]=Math.hypot(re[b], im[b]);
+  return mag;
+}
+function peakCarrier(mag, sampleRate){
+  const bin=f=>Math.round(f*NFFT/sampleRate);
+  const lo=Math.max(1, bin(20)), hi=Math.min(mag.length-2, bin(1500));
+  let pk=lo, best=-1;
+  for (let b=lo;b<=hi;b++){ if (mag[b]>best){ best=mag[b]; pk=b; } }
+  // parabolic interpolation on log magnitudes for sub-bin accuracy
+  const l=Math.log(mag[pk-1]+1e-12), c=Math.log(mag[pk]+1e-12), r=Math.log(mag[pk+1]+1e-12);
+  const denom=(l-2*c+r);
+  const delta = denom!==0 ? 0.5*(l-r)/denom : 0;
+  const freq=(pk+delta)*sampleRate/NFFT;
+  return {freq, mag:best};
+}
+function bandOf(f){ f=Math.abs(f);
+  if (f<0.5) return "—"; if (f<=3) return "delta"; if (f<=7) return "theta";
+  if (f<=12) return "alpha"; if (f<=30) return "beta"; if (f<=45) return "gamma"; return "> beat range"; }
+
+// ---------- core analysis (pure; testable) ----------
+function analyzeChannels(channels, sampleRate){
+  const out={sampleRate, nch:channels.length};
+  if (channels.length < 2){
+    out.mono=true;
+    out.verdict={level:"fail",title:"Mono file — not binaural.",
+      detail:"This file has a single channel. A binaural beat needs two different tones, one per ear. With only one channel there is no difference to build a beat from. Whatever the label said, the mechanism physically isn't here."};
+    return out;
+  }
+  const L=channels[0], R=channels[1], n=Math.min(L.length,R.length);
+  let sumD=0,sumL=0; for (let i=0;i<n;i++){ const d=L[i]-R[i]; sumD+=d*d; sumL+=L[i]*L[i]; }
+  out.diffDb = 10*Math.log10((sumD/(sumL||1e-20))+1e-20);
+  out.identical = out.diffDb < -50;
+  const magL=spectrumOf(L,sampleRate), magR=spectrumOf(R,sampleRate);
+  out.spectrumL=magL; out.spectrumR=magR;
+  const cL=peakCarrier(magL,sampleRate), cR=peakCarrier(magR,sampleRate);
+  out.leftHz=cL.freq; out.rightHz=cR.freq; out.beat=Math.abs(cL.freq-cR.freq); out.band=bandOf(out.beat);
+  if (out.identical){
+    out.verdict={level:"fail",title:"Duplicated mono — not binaural.",
+      detail:"Left and right are the same signal (they cancel to near-silence when inverted). It's a stereo file on the outside, mono on the inside — so there's no carrier difference and no binaural beat. This is the most common failure."};
+  } else if (out.beat>=0.3 && out.beat<=45){
+    out.verdict={level:"pass",title:"Real two-carrier construction.",
+      detail:"Two genuinely different carriers, with a "+out.beat.toFixed(2)+" Hz difference — that's a real binaural build ("+out.band+" band). This passes the binaural check. It does not yet tell you whether the beat matches the claimed band, whether it ramps, or whether any subliminal is real — that's the full audit (Chapter 11)."};
+  } else {
+    out.verdict={level:"warn",title:"Stereo — but no clear binaural carrier pair.",
+      detail:"The channels differ, but I don't find two clean carriers a few hertz apart. This is what music, an “8D” pan, or a monaural/isochronic track looks like — not a binaural two-tone build. If it's sold as binaural, that's a red flag worth the full audit."};
+  }
+  return out;
+}
+window.analyzeChannels = analyzeChannels;
+
+// ---------- spectrum drawing ----------
+function drawSpectrum(res){
+  const cv=document.getElementById("spectrum"), ctx=cv.getContext("2d");
+  const W=cv.width, H=cv.height; ctx.clearRect(0,0,W,H);
+  if (!res.spectrumL) return;
+  const sr=res.sampleRate, maxF=1000, maxBin=Math.round(maxF*NFFT/sr);
+  let peak=1e-9; for (let b=1;b<=maxBin;b++){ if(res.spectrumL[b]>peak)peak=res.spectrumL[b]; if(res.spectrumR[b]>peak)peak=res.spectrumR[b]; }
+  const draw=(mag,color)=>{ ctx.strokeStyle=color; ctx.lineWidth=1.5; ctx.beginPath();
+    for (let b=1;b<=maxBin;b++){ const x=(b/maxBin)*W; const y=H-6-(mag[b]/peak)*(H-16); if(b===1)ctx.moveTo(x,y); else ctx.lineTo(x,y);} ctx.stroke(); };
+  // axis ticks every 200 Hz
+  ctx.fillStyle="#b8b4d0"; ctx.font="11px Segoe UI,Arial";
+  for (let f=200; f<=1000; f+=200){ const x=(f/maxF)*W; ctx.fillText(f+"Hz", x-14, H-2); ctx.strokeStyle="#eee"; ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H-14); ctx.stroke(); }
+  draw(res.spectrumR,"#7c3aed"); draw(res.spectrumL,"#4f46e5");
+}
+
+// ---------- UI wiring ----------
+function fmtHz(f){ return (f===undefined||f===null||isNaN(f))?"—":(f<1?f.toFixed(2):f.toFixed(1))+" Hz"; }
+function render(res){
+  const v=document.getElementById("verdict");
+  v.className="verdict "+res.verdict.level;
+  document.getElementById("vtag").textContent={pass:"Passes",warn:"Inconclusive",fail:"Fails"}[res.verdict.level];
+  document.getElementById("vtitle").textContent=res.verdict.title;
+  document.getElementById("vdetail").textContent=res.verdict.detail;
+  document.getElementById("s-left").textContent = res.mono?"—":fmtHz(res.leftHz);
+  document.getElementById("s-right").textContent = res.mono?"—":fmtHz(res.rightHz);
+  document.getElementById("s-beat").textContent = res.mono?"none":(res.identical?"0 Hz":fmtHz(res.beat));
+  document.getElementById("s-band").textContent = (res.mono||res.identical)?"—":(res.band||"—");
+  drawSpectrum(res);
+  document.getElementById("results").style.display="block";
+}
+async function handleFile(file){
+  const status=document.getElementById("status");
+  status.textContent="Analyzing "+file.name+" …";
+  try{
+    const buf=await file.arrayBuffer();
+    const AC=window.AudioContext||window.webkitAudioContext;
+    const ctx=new AC();
+    const audio=await ctx.decodeAudioData(buf);
+    const channels=[]; for (let c=0;c<audio.numberOfChannels;c++) channels.push(audio.getChannelData(c));
+    const res=analyzeChannels(channels, audio.sampleRate);
+    ctx.close();
+    status.textContent="Analyzed: "+file.name+"  ("+audio.numberOfChannels+" channel"+(audio.numberOfChannels>1?"s":"")+", "+audio.sampleRate+" Hz)";
+    render(res);
+  }catch(err){
+    status.textContent="Couldn't decode that file ("+err.message+"). Try a WAV, MP3, FLAC, M4A or OGG.";
+  }
+}
+const drop=document.getElementById("drop"), fileInput=document.getElementById("file");
+drop.addEventListener("click",()=>fileInput.click());
+drop.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")fileInput.click();});
+fileInput.addEventListener("change",e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
+["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
+drop.addEventListener("drop",e=>{ const f=e.dataTransfer.files[0]; if(f) handleFile(f); });
+
+// ---------- self-test (dump-dom): synth channels, no audio device needed ----------
+if (location.hash==="#selftest"){
+  const sr=44100, dur=1.5, n=Math.floor(sr*dur);
+  const sine=f=>{const a=new Float32Array(n); for(let i=0;i<n;i++)a[i]=Math.sin(2*Math.PI*f*i/sr); return a;};
+  const tests=[
+    ["real binaural 100/102.5", [sine(100), sine(102.5)]],
+    ["duplicated mono 200/200", (()=>{const s=sine(200); return [s, s.slice()];})()],
+    ["real binaural 200/210",   [sine(200), sine(210)]],
+    ["mono only 200",           [sine(200)]],
+  ];
+  const lines=tests.map(([name,ch])=>{ const r=analyzeChannels(ch,sr);
+    return name+" => "+r.verdict.level+" | L="+fmtHz(r.leftHz)+" R="+fmtHz(r.rightHz)+" beat="+(r.beat!==undefined?r.beat.toFixed(3):"—")+" band="+(r.band||"—")+" diffDb="+(r.diffDb!==undefined?r.diffDb.toFixed(1):"—"); });
+  const pre=document.getElementById("selftest-output"); pre.hidden=false; pre.textContent=lines.join("\n");
+}
+</script>
+</body>
+</html>

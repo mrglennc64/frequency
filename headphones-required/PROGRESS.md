@@ -55,7 +55,9 @@ Update this table as work completes; it is the single source of truth for launch
 | Deliverable | File / location | Target week | Status |
 |---|---|---|---|
 | Lead-magnet PDF (Ch. 2 standalone) | `lead-magnet/The-10-Minute-Test.pdf` (4 pp, voiced) | W3 (Jul 20–26) | **built + LIVE on VPS (Jul 3)** |
-| Opt-in landing page | `launch/pages/freq-index.html` → `/var/www/freq.usesmpt.com` | W3 (Jul 20–26) | **LIVE over HTTP at freq.usesmpt.com (Jul 3)** — TLS pending Glenn's okay; email capture pending ESP |
+| Opt-in landing page | `launch/pages/freq-index.html` → `/var/www/freq.usesmpt.com` | W3 (Jul 20–26) | **LIVE (HTTPS) at https://freq.usesmpt.com (Jul 3)** — TLS cert active; email capture pending ESP |
+| Free browser tool — The Frequency Test | `launch/pages/frequency-test.html` → `/test/` | (free-tool play) | **LIVE at https://freq.usesmpt.com/test (Jul 3)** — client-side FFT, DSP self-tested; Check 1 of the audit |
+| TLS certificate (Let's Encrypt) | certbot --nginx, auto-renew | — | **done (Jul 3)** — valid to Oct 1, auto-renewing |
 | Narration voice (ElevenLabs) | `voice/VOICE-GUIDE.md` — voice ID `tXoAX6rzg9vkoUfJKy0k` | — | ID set; Glenn records sample Jul 3 |
 | Sales page (€47 / €97) | per `launch/funnel-checklist.md` | W6 (Aug 10–16) | not started |
 | 3 verified demonstration sessions (€97 tier) | audio + certificates | W5–W6 | not started |
