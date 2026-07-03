@@ -54,8 +54,8 @@ Update this table as work completes; it is the single source of truth for launch
 
 | Deliverable | File / location | Target week | Status |
 |---|---|---|---|
-| Lead-magnet PDF (Ch. 2 standalone) | `lead-magnet/spec.md` → designed PDF | W3 (Jul 20–26) | not started |
-| Opt-in landing page + email capture | `launch/pages/opt-in.html` | W3 (Jul 20–26) | example drafted (Jul 2) — wire ESP/video/links |
+| Lead-magnet PDF (Ch. 2 standalone) | `lead-magnet/The-10-Minute-Test.pdf` (4 pp, voiced) | W3 (Jul 20–26) | **built + LIVE on VPS (Jul 3)** |
+| Opt-in landing page | `launch/pages/freq-index.html` → `/var/www/freq.usesmpt.com` | W3 (Jul 20–26) | **LIVE over HTTP at freq.usesmpt.com (Jul 3)** — TLS pending Glenn's okay; email capture pending ESP |
 | Narration voice (ElevenLabs) | `voice/VOICE-GUIDE.md` — voice ID `tXoAX6rzg9vkoUfJKy0k` | — | ID set; Glenn records sample Jul 3 |
 | Sales page (€47 / €97) | per `launch/funnel-checklist.md` | W6 (Aug 10–16) | not started |
 | 3 verified demonstration sessions (€97 tier) | audio + certificates | W5–W6 | not started |

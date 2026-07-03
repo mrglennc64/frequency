@@ -1,0 +1,27 @@
+# Deployed nginx server block for freq.usesmpt.com (record of what's on the VPS)
+# Live: /etc/nginx/sites-available/freq.usesmpt.com (symlinked into sites-enabled)
+# Web root: /var/www/freq.usesmpt.com  (index.html = launch/pages/freq-index.html; The-10-Minute-Test.pdf = lead-magnet PDF)
+# Deployed Jul 3, 2026. HTTP live. TLS NOT yet added — awaiting Glenn's okay to run:
+#   certbot --nginx -d freq.usesmpt.com --agree-tos -m <email> --redirect
+# (certbot will append the :443 block + 80→443 redirect, "managed by Certbot".)
+server {
+    listen 80;
+    listen [::]:80;
+    server_name freq.usesmpt.com;
+
+    root /var/www/freq.usesmpt.com;
+    index index.html;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/html;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location = /The-10-Minute-Test.pdf {
+        default_type application/pdf;
+        add_header Content-Disposition 'inline; filename="The-10-Minute-Test.pdf"';
+    }
+}
